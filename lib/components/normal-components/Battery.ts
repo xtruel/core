@@ -1,5 +1,5 @@
 import { batteryProps, resolveManufacturerPartNumber } from "@tscircuit/props"
-import type { SourceSimpleBatteryInput } from "circuit-json"
+import type { SourceSimplePowerSourceInput } from "circuit-json"
 
 import type { BaseSymbolName, Ftype, PassivePorts } from "lib/utils/constants"
 import { NormalComponent } from "../base-components/NormalComponent/NormalComponent"
@@ -34,11 +34,12 @@ export class Battery extends NormalComponent<
       name: this.name,
       ftype: "simple_power_source" as Ftype,
       capacity: props.capacity,
+      voltage: props.voltage,
       supplier_part_numbers: props.supplierPartNumbers,
       manufacturer_part_number: resolveManufacturerPartNumber(props),
       are_pins_interchangeable: false,
       display_name: props.displayName,
-    } as SourceSimpleBatteryInput)
+    } as SourceSimplePowerSourceInput & { capacity?: number })
     this.source_component_id = source_component.source_component_id
   }
 }
