@@ -70,6 +70,10 @@ export class PinHeader extends NormalComponent<typeof pinHeaderProps> {
         footprintString += `_rows${rows}`
       }
 
+      if (this._parsedProps.rightAngle) {
+        footprintString += "_rightangle"
+      }
+
       return footprintString
     }
     return null
