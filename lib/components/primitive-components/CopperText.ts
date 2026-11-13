@@ -20,6 +20,7 @@ export class CopperText extends PrimitiveComponent<typeof copperTextProps> {
     const container = this.getPrimitiveContainer()!
     const position = this._getGlobalPcbPositionBeforeLayout()
     const subcircuit = this.getSubcircuit()
+    const { maybeFlipLayer } = this._getPcbPrimitiveFlippedHelpers()
 
     const pcb_copper_text = db.pcb_copper_text.insert({
       anchor_alignment: props.anchorAlignment,
@@ -29,7 +30,7 @@ export class CopperText extends PrimitiveComponent<typeof copperTextProps> {
       },
       font: "tscircuit2024",
       font_size: props.fontSize!,
-      layer: props.layer ?? "top",
+      layer: maybeFlipLayer(props.layer ?? "top"),
       text: normalizeTextForCircuitJson(props.text),
       ccw_rotation: props.pcbRotation,
       is_mirrored: props.mirrored,
